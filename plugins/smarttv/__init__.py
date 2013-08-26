@@ -31,11 +31,12 @@ from uuid import getnode as getmac
 logger = logging.getLogger('')
 
 class SmartTV():
-    def __init__(self, smarthome, host, port=55000, tvid=1):
+    def __init__(self, smarthome, host, port=55000, tvid=1,tvtype=''):
         self._sh = smarthome
         self._host = host
         self._port = port
         self._tvid = int(tvid)
+        self._tvtype=tvtype
 
     def push(self, key):
         try:
@@ -50,8 +51,8 @@ class SmartTV():
         mac = self._int_to_str(getmac())    # mac of remote
         remote = 'sh.py remote'             # remote name
         dst = self._host                    # ip of tv
-        app = 'python'                      # iphone..iapp.samsung
-        tv = 'UE32ES6300'                   # iphone.UE32ES6300.iapp.samsung
+        app = 'iphone..iapp.samsung'                   # iphone..iapp.samsung
+        tv = 'iphone.'+self._tvtype+'.iapp.samsung'     # iphone.UE32ES6300.iapp.samsung
 
         logger.debug("src = {0}, mac = {1}, remote = {2}, dst = {3}, app = {4}, tv = {5}".format(src, mac, remote, dst, app, tv))
 
